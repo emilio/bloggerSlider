@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Objetos JS</title>
+		<meta charset=UTF-8/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<style>
+			.slider-nav{
+				margin:10px auto;
+				width:600px;
+			}
+			.slider-nav a{
+				background:#f8f8f8;
+				color:#aaa;
+				display: block;
+			    float: left;
+			    padding:4px 7px;
+			    cursor:pointer;
+
+			    text-align: center;
+			    border:1px solid #ddd;
+			    border-right-width:0;
+			    -moz-transition:.5s;
+				-webkit-transition:.5s;
+				-o-transition:.5s;
+				-ms-transition:.5s;
+				transition:.5s;
+			   
+			}
+			.slider-nav a:last-child{
+				border-right-width:1px;
+			}
+			.slider-nav a.slide{}
+			.slider-nav a.activo{
+				background:#fff;
+				color:#aaa;
+				box-shadow:0 0 2px #333 inset
+			}
+			.slider-nav a.prev{border-radius:5px 0 0 5px}
+			.slider-nav a.next{border-radius:0 5px 5px 0;
+			border-right-width:1px;}
+			#slider-entradas{
+				width:600px;
+				margin:0 auto;
+				overflow:hidden;
+				display:none;
+				box-shadow:0 0 7px #aaa;
+				background:#eee;
+				border-radius:3px;
+				border:1em solid transparent;/*Para simular padding*/
+			}
+			#slider-entradas ul{
+				width:1000000px;
+				list-style: none;
+				margin: 0;
+				padding: 0
+			}
+			
+			.entrada{
+				margin:0;
+				font-family:Arial, Helvetica, sans-serif;
+				font-size: .8em;
+				width:600px;
+				float:left;
+			}
+			
+			.entrada h2 a{
+				color:#4f4f4f;
+				font-weight:bold;
+				font-size:1.15em
+			}
+			.entrada.actual{
+				opacity:1 !important;
+				filter:alpha(opacity = 100)!important
+			}
+			.entrada img{
+				float:left;
+				padding:5px;
+				background:white;
+				box-shadow: 0 0 5px rgba(0,0,0,.5);
+				margin:0 10px 10px 0;
+			}
+			.entrada span.fecha{
+				font-size:.9em;
+				color:#555;
+				border-bottom:1px dashed #666;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="jQuery.bloggerSlider.js"></script>
+<h2 class="title">Click</h2>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+<h2 class="title">Click2</h2>
+<h2 class="title">Click3</h2>
+<div id="slider-entradas"><ul></ul></div>
+<div id="slider-nav">
+	<a class=nav data-dir="next">Siguiente</a>
+	<a class=nav data-dir="prev">Anterior</a>
+	<a class=nav data-slide="1">1</a>
+	<a class=nav data-slide="3">3</a>
+</div>
+<script type="plantilla-blog" id="plantilla">
+	<li class="entrada"> {{img}}
+	<h2><a href="{{link}}" title="{{tit}}">{{tit}}</a></h2>
+	<span class="fecha">{{fecha}}</span>
+	<p>{{res}}</p>
+	</li>
+</script>
+
+<script>
+$('#slider-entradas').show().bloggerSlider({
+	blog:'http://emiliocoboscmc.blogspot.com',
+	avanceAuto:600,
+	tiempoAnim:200
+})
+</script></body>
+</html>

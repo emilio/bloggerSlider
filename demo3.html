@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+	<title>Demo: Carrusel de entradas "sensible"</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'/>
+	<link href="../demos.css" rel="stylesheet" type="text/css"/>
+	<link href="pretty.css" rel="stylesheet" type="text/css"/>
+	<style>
+#demo3{
+	overflow:scroll;
+	/*Nótese que no es necesario si usamos la función para que cambie según el tamaño de la pantalla*/
+	width:900px;
+	margin:0 auto;
+	background:#fff;
+	font-size: .7em;
+	border: 10px solid #FFFFFF;
+	color:#555;
+	-webkit-border-radius:10px;
+	   -moz-border-radius:10px;
+	        border-radius:10px;
+	-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.3);
+	   -moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.3);
+	        box-shadow:0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#demo3 h2 a{
+	font-size:16px;
+	color:#666;
+	text-shadow:1px 1px #eee,2px 2px #bbb;
+	text-decoration:none;
+}
+#demo3 ul {
+	width:6000px;
+	list-style: none;
+}
+#demo3 .entrada {
+    float: left;
+	width:300px;
+}
+#demo3 img{
+	float:left;
+	padding:4px;
+	background:#fff;
+	border:0;
+	margin:5px;
+	-webkit-box-shadow:0 0 3px rgba(0,0,0,.4);
+	   -moz-box-shadow:0 0 3px rgba(0,0,0,.4);
+	        box-shadow:0 0 3px rgba(0,0,0,.4);
+}
+#slider-nav{
+	width:900px;
+	margin:0 auto;
+	margin-bottom:100px;
+	position:relative;
+}
+
+#slider-nav a.slide{
+	display:none;
+  }
+#slider-nav a.prev,#slider-nav a.next{
+	cursor:pointer;
+	position:absolute;
+	text-indent:-9999px;
+	width:25px;
+	height:42px;
+	background:url(http://emiliocobos.site40.net/blogger/add-ons/nivo-slider/themes/orman/arrows.png);
+	background-position:right top;
+	bottom:50px;
+	right:-34px
+}
+#slider-nav a.prev{
+	left:-34px;
+	right:auto;
+	background-position: left top
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Emilio Cobos" />
+	<!-- Date: 2012-01-01 -->
+</head>
+<body>
+<div id="container"><div id="top-bar"><div class="title"><a href="http://emiliocoboscmc.blogspot.com">Emilio Cobos</a></div><div class="link"><a href="http://emiliocoboscmc.blogspot.com">Lee el artículo completo</a></div> <p>Demo: Carrusel de entradas "sensible"</p></div>
+
+<div id="demo-nav-container">
+<div id="demo-nav">
+	<p>Otras demos:</p>
+	<ul><li><a href="demo1.html">1</a></li>
+	<li><a href="demo2.html">2</a></li>
+	<li class="actual"><a href="demo3.html">3</a></li>
+	<li><a href="demo4.html">4</a></li>
+	<li><a href="demo5.html">5</a></li>
+</ul></div></div>
+<div id="demo-container">
+<div id="demo3">
+</div>
+<h1>El HTML</h1>
+<pre class="lang-html linenums prettyprint">
+&lt;div id=&quot;demo3&quot;&gt;&lt;/div&gt;
+</pre>
+<h1>El Javascript</h1>
+<pre class="lang-javascript prettyprint linenums">
+&lt;script&gt;
+var opcionesEntradas = {
+	contenedor:'demo3',
+	charsResumen:125,
+	tamanoImagen:60
+}
+&lt;/script&gt;
+&lt;script src=&quot;http://emiliocoboscmc.blogspot.com/feeds/posts/default?alt=json-in-script&amp;amp;max-results=10&amp;amp;callback=imgtitulo&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var demo3 = new slider({
+	contenedor: 'demo3',
+	nav:'slider-nav',
+	autoNav:true,
+	avanceAuto:3000
+})
+demo3.init()
+
+;(function(){
+window.onresize = resizeSlider
+
+function resizeSlider(){
+		var w = window.innerWidth || document.body.offsetWidth, i = 0,
+		lis = demo3.contenedor.getElementsByTagName('li'), ancho = 300,
+		numEntradas = 3
+		if( !w ){ return }
+		if( w &gt; 1200 ){
+			numEntradas = 4
+		}
+		if( w &gt; 1600 ){
+			ancho = 400
+		}
+		
+		if( w &lt; 1000 ){
+			ancho = 200
+		}
+		if( w &lt; 650 ){
+			numEntradas = 2
+		}
+		//Firefox no lee a partir de 455 :/
+		if( w &lt; 456 ){
+			numEntradas -= 1
+		}
+		
+		demo3.contenedor.style.width = ancho * numEntradas + 'px'
+		demo3.nav.style.width = ancho * numEntradas + 'px'
+
+		demo3.anchocontenido = ancho
+		for(; lis[i]; i++){
+			lis[i].style.width = ancho+'px'
+		}
+		//esto es para que al pulsar siguiente no quede solo una entrada.
+		function cambiarActual(){
+			if( demo3.slideActual &gt;= demo3.contenido.length - numEntradas ){
+				demo3.irSlide(0)
+			}
+			setTimeout(cambiarActual,3000)
+			
+		}
+		cambiarActual()
+	}
+
+//Lo llamamos la primera vez para que sea acorde a la pantalla
+resizeSlider()
+})()
+&lt;/script&gt;
+</pre>
+<h1>El CSS</h1>
+<pre class="lang-css prettyprint linenums">
+#demo3{
+	overflow:scroll;
+	/*N&oacute;tese que no es necesario si usamos la funci&oacute;n para que cambie seg&uacute;n el tama&ntilde;o de la pantalla*/
+	width:900px;
+	margin:0 auto;
+	background:#fff;
+	font-size: .7em;
+	border: 10px solid #FFFFFF;
+	color:#555;
+	border-radius:10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#demo3 h2 a{
+	font-size:16px;
+	color:#666;
+	text-shadow:1px 1px #eee,2px 2px #bbb;
+	text-decoration:none;
+}
+#demo3 ul {
+	width:6000px;
+	list-style: none;
+}
+#demo3 .entrada {
+    float: left;
+	width:300px;
+}
+#demo3 img{
+	float:left;
+	padding:4px;
+	background:#fff;
+	border:0;
+	margin:5px;
+	box-shadow:0 0 3px rgba(0,0,0,.4)
+}
+#slider-nav{
+	width:900px;
+	margin:0 auto;
+	margin-bottom:10px;
+	position:relative;
+}
+
+#slider-nav a.slide{
+	display:none;
+  }
+#slider-nav a.prev,#slider-nav a.next{
+	position:absolute;
+	text-indent:-9999px;
+	width:25px;
+	height:42px;
+	background:url(http://emiliocobos.site40.net/blogger/add-ons/nivo-slider/themes/orman/arrows.png);
+	background-position:right top;
+	bottom:30px;
+	right:-34px
+}
+#slider-nav a.prev{
+	left:-34px;
+	right:auto;
+	background-position: left top
+}
+</pre>
+</div>
+</div>
+<script src="bloggerSlider.js"></script>
+<script>
+var opcionesEntradas = {
+	contenedor:'demo3',
+	charsResumen:125,
+	tamanoImagen:60
+}
+</script>
+<script src="http://emiliocoboscmc.blogspot.com/feeds/posts/default?alt=json-in-script&amp;max-results=10&amp;callback=imgtitulo"></script>
+<script>
+var demo3 = new slider({
+	contenedor: 'demo3',
+	nav:'slider-nav',
+	autoNav:true,
+	avanceAuto:3000
+})
+demo3.init()
+
+;(function(){
+window.onresize = resizeSlider
+
+function resizeSlider(){
+		var w = window.innerWidth || document.body.offsetWidth, i = 0,
+		lis = demo3.contenedor.getElementsByTagName('li'), ancho = 300,
+		numEntradas = 3
+		if( !w ){ return }
+		if( w > 1200 ){
+			numEntradas = 4
+		}
+		if( w > 1600 ){
+			ancho = 400
+		}
+		
+		if( w < 1000 ){
+			ancho = 250
+		}
+		if( w < 650 ){
+			numEntradas = 2
+		}
+		//Firefox no lee a partir de 455 :/
+		if( w < 456 ){
+			numEntradas = 1
+		}
+		
+		demo3.contenedor.style.width = ancho * numEntradas + 'px'
+		demo3.nav.style.width = ancho * numEntradas + 'px'
+
+		demo3.anchocontenido = ancho
+		for(; lis[i]; i++){
+			lis[i].style.width = ancho+'px'
+		}
+		//
+		function cambiarActual(){
+			if( demo3.slideActual >= demo3.contenido.length - numEntradas ){
+				demo3.irSlide(0)
+			}
+			setTimeout(cambiarActual,3000)
+			
+		}
+		cambiarActual()
+	}
+
+//Lo llamamos la primera vez para que sea acorde a la pantalla
+resizeSlider()
+})()
+</script>
+</body>
+</html>

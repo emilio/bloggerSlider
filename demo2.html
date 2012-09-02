@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+	<title>Demo: Slider de entradas actualizado automáticamente y animado sin librerías</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+	<link href="../demos.css" rel="stylesheet" type="text/css"/>
+	<link href="pretty.css" rel="stylesheet" type="text/css"/>
+	<style>
+#demo2{
+	overflow:scroll;
+	width:450px;
+	margin:0 auto;
+}
+#demo2 ul {
+	width:6000px;
+}
+#demo2 .entrada {
+	
+	width:450px;
+	height:240px;
+	float:left;
+	position:relative;
+	list-style-type:none;
+}
+#demo2 .entrada .caption{
+	position:absolute;
+	background:#000;
+	opacity:.7;
+	filter:alpha(opacity=70);
+	bottom:0;
+	left:0;
+	width:100%;
+	color:white;
+	font-size:.8em;
+	padding:3px;
+}
+#demo2 .entrada .caption h2{
+	font-size:17px;
+}
+#demo2 .entrada .caption a{
+	color:white
+}
+#slider-nav{
+	width:80px;
+	height:30px;
+	margin:0 auto;
+	position:relative
+}
+#slider-nav a{
+	display:block;
+	float:left;
+	line-height:30px;
+	margin-right:3px;
+	cursor:pointer;
+}
+#slider-nav a.prev,#slider-nav a.next{
+	background:#538CC6;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+    bottom: 125px;
+    font-size: 70px;
+    height: 42px;
+    left: 280px;
+    position: absolute;
+}
+#slider-nav a.prev{
+	left:-232px;
+}
+#slider-nav .slide{
+	position:relative;
+	text-indent: -9999px;
+	top:50%;
+	width:10px;
+	height:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	margin-top:-3px;
+	background:#369;
+}
+#slider-nav .slide.activo{
+	background:#333;
+}
+#copy{
+	display: block;
+	text-align:center;
+	margin:20px 0;
+}
+
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Emilio Cobos" />
+	<!-- Date: 2012-01-01 -->
+</head>
+<body>
+<div id="container"><div id="top-bar"><div class="title"><a href="http://emiliocoboscmc.blogspot.com">Emilio Cobos</a></div><div class="link"><a href="http://emiliocoboscmc.blogspot.com">Lee el artículo completo</a></div> <p>Demo: Menú horizontal desplegable animado con Javascript. Efecto fade jQuery.</p></div>
+
+<div id="demo-nav-container">
+<div id="demo-nav">
+	<p>Otras demos:</p>
+	<ul><li><a href="demo1.html">1</a></li>
+	<li class="actual"><a href="demo2.html">2</a></li>
+	<li><a href="demo3.html">3</a></li>
+	<li><a href="demo4.html">4</a></li>
+	<li><a href="demo5.html">5</a></li>
+</ul></div></div>
+<div id="demo-container">
+<div id="demo2">
+	
+</div>
+<span id="copy">Gracias a <a href="http://www.ayuda-bloggers.com">ayuda-bloggers</a> por dejarme usar su feed.</span>
+<script type="plantilla-slider" id="plantilla-slider">
+	<li style="background-image: url({{img}})"class="entrada">
+		<div class="caption">
+			<h2>{{tit}}</h2><span>{{fecha}}</span>
+			<p>{{res}}<br><a href="{{link}}">Leer más &raquo;</a></p>
+		</div>
+	</li>
+</script>
+</div>
+<h1>El HTML</h1>
+<pre class="lang-html linenums prettyprint">
+&lt;div id=&quot;demo1&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;plantilla-slider&quot; id=&quot;plantilla-slider&quot;&gt;
+	&lt;li style=&quot;background-image: url({{img}})&quot;class=&quot;entrada&quot;&gt;
+		&lt;div class=&quot;caption&quot;&gt;
+			&lt;h2&gt;{{tit}}&lt;/h2&gt;&lt;span&gt;{{fecha}}&lt;/span&gt;
+			&lt;p&gt;{{res}}&lt;br /&gt;&lt;a href=&quot;{{link}}&quot;&gt;Leer m&aacute;s &amp;raquo;&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+&lt;/script&gt;
+</pre>
+<h1>El Javascript</h1>
+<pre class="lang-javascript prettyprint linenums">
+&lt;script&gt;var opcionesEntradas = {
+	contenedor:'demo2',
+	charsResumen:45,
+	tamanoImagen:600,
+	sourceExperimental:true,
+	tagImagen:false
+}
+&lt;/script&gt;
+&lt;script src=&quot;http://www.ayuda-bloggers.info/feeds/posts/default?alt=json-in-script&amp;amp;max-results=4&amp;amp;callback=imgtitulo&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+	var demo2 = new slider({
+		contenedor: 'demo2',
+	textoAnterior: '&amp;laquo;',
+	textoSiguiente: '&amp;raquo;',
+	autoNav:true,
+	avanceAuto:2500
+}).init()
+&lt;/script&gt;
+</pre>
+<h1>El CSS</h1>
+<pre class="lang-css prettyprint linenums">
+#demo2{
+	overflow:scroll;
+	width:450px;
+	margin:0 auto;
+}
+#demo2 ul {
+	width:6000px;
+}
+#demo2 .entrada {
+	
+	width:450px;
+	height:240px;
+	float:left;
+	position:relative;
+	list-style-type:none;
+}
+#demo2 .entrada .caption{
+	position:absolute;
+	background:#000;
+	opacity:.7;
+	filter:alpha(opacity=70);
+	bottom:0;
+	left:0;
+	width:100%;
+	color:white;
+	font-size:.8em;
+	padding:3px;
+}
+#demo2 .entrada .caption h2{
+	font-size:17px;
+}
+#demo2 .entrada .caption a{
+	color:white
+}
+#slider-nav{
+	width:80px;
+	height:30px;
+	margin:0 auto;
+	position:relative
+}
+#slider-nav a{
+	display:block;
+	float:left;
+	line-height:30px;
+	margin-right:3px;
+	cursor:pointer;
+}
+#slider-nav a.prev,#slider-nav a.next{
+	background:#538CC6;
+    border-radius: 10px;
+    bottom: 125px;
+    font-size: 70px;
+    height: 42px;
+    left: 280px;
+    position: absolute;
+}
+#slider-nav a.prev{
+	left:-232px;
+}
+#slider-nav .slide{
+	position:relative;
+	text-indent: -9999px;
+	top:50%;
+	width:10px;
+	height:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+	border-radius:5px;
+	margin-top:-3px;
+	background:#369;
+}
+#slider-nav .slide.activo{
+	background:#333;
+}
+</pre>
+</div>
+
+<script src="bloggerSlider.js"></script>
+<script>var opcionesEntradas = {
+	contenedor:'demo2',
+	charsResumen:45,
+	tamanoImagen:600,
+	sourceExperimental:true,
+	tagImagen:false
+}
+</script>
+<script src="http://www.ayuda-bloggers.info/feeds/posts/default?alt=json-in-script&amp;max-results=4&amp;callback=imgtitulo"></script>
+<script>
+	var demo2 = new slider({
+		contenedor: 'demo2',
+	textoAnterior: '&laquo;',
+	textoSiguiente: '&raquo;',
+	autoNav:true,
+	avanceAuto:2500
+}).init()
+</script>
+</body>
+</html>
+

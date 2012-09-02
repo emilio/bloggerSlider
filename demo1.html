@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+	<title>Demo: Slider de entradas actualizado automáticamente y animado sin librerías</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'/>
+	<link href="../demos.css" rel="stylesheet" type="text/css"/>
+	<link href="pretty.css" rel="stylesheet" type="text/css"/>
+	<style>	
+/*Estilos del menú*/
+#slider-nav{
+    margin:10px auto;
+	width:378px
+}
+#slider-nav a{
+    background:#f8f8f8;
+    color:#aaa;
+    display:block;
+    float:left;
+    padding:4px 7px;
+    cursor:pointer;
+    text-align:center;
+    border:1px solid #ddd;
+    border-right-width:0;
+}
+#slider-nav a:last-child{
+    border-right-width:1px;
+}
+#slider-nav a.slide{
+/*Estilos para los 
+ * botones individuales */
+}
+#slider-nav a.activo{
+    background:#fff;
+    color:#aaa;
+    -webkit-box-shadow:0 0 2px #333 inset;
+       -moz-box-shadow:0 0 2px #333 inset;
+            box-shadow:0 0 2px #333 inset;
+}
+#slider-nav a.prev{
+    -webkit-border-radius:5px 0 0 5px;
+       -moz-border-radius:5px 0 0 5px;
+            border-radius:5px 0 0 5px;
+}
+#slider-nav a.next{
+    -webkit-border-radius:0 5px 5px 0;
+       -moz-border-radius:0 5px 5px 0;
+            border-radius:0 5px 5px 0;
+    border-right-width:1px;
+}
+/*Estilos del slider*/
+#demo1{
+    width:600px;
+    margin:0 auto;
+    overflow:scroll;
+    -webkit-box-shadow:0 0 7px #aaa;
+       -moz-box-shadow:0 0 7px #aaa;
+            box-shadow:0 0 7px #aaa;
+    background:#eee;
+    -webkit-border-radius:3px;
+       -moz-border-radius:3px;
+            border-radius:3px;
+    border:1em solid #eee;
+ /*   -webkit-transition:2s;
+       -moz-transition:2s;
+         -o-transition:2s;
+            transition:2s;*/
+}
+#demo1 ul{
+    width:1000000px;
+    list-style:none;
+    margin:0;
+    padding:0;
+/*    -webkit-transition:2s;
+       -moz-transition:2s;
+         -o-transition:2s;
+            transition:2s;*/
+}
+.entrada{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:.8em;
+    width:600px;
+    float:left;
+}
+.entrada h2 a{
+    color:#4f4f4f;
+    font-weight:bold;
+    font-size:1.15em;
+}
+.entrada.actual{
+/* Algún estilo especial que queréis
+ * que tenga la entrada actual?*/
+}
+.entrada img{
+    float:left;
+    padding:5px;
+    background:white;
+    -webkit-box-shadow:0 0 5px rgba(0,0,0,.5);
+       -moz-box-shadow:0 0 5px rgba(0,0,0,.5);
+            box-shadow:0 0 5px rgba(0,0,0,.5);
+    margin:0 10px 10px 5px;
+}
+.entrada span.fecha{
+    font-size:.9em;
+    color:#555;
+    border-bottom:1px dashed #666;
+}
+.entrada a img,.entrada a{
+	outline: 0;
+	border: 0;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Emilio Cobos" />
+	<!-- Date: 2012-01-01 -->
+</head>
+<body>
+<div id="container"><div id="top-bar"><div class="title"><a href="http://emiliocoboscmc.blogspot.com">Emilio Cobos</a></div><div class="link"><a href="http://emiliocoboscmc.blogspot.com">Lee el artículo completo</a></div> <p>Demo: Menú horizontal desplegable animado con Javascript. Efecto fade jQuery.</p></div>
+<div id="demo-nav-container">
+<div id="demo-nav">
+	<p>Otras demos:</p>
+	<ul><li class="actual"><a href="demo1.html">1</a></li>
+	<li><a href="demo2.html">2</a></li>
+	<li><a href="demo3.html">3</a></li>
+	<li><a href="demo4.html">4</a></li>
+	<li><a href="demo5.html">5</a></li>
+</ul></div></div>
+<div id="demo-container">
+<div id="demo1">
+	
+</div>
+</div>
+<h1>El HTML</h1>
+<pre class="lang-html linenums prettyprint">
+&lt;div id=&quot;demo1&quot;&gt;&lt;/div&gt;
+</pre>
+<h1>El Javascript</h1>
+<pre class="lang-javascript prettyprint linenums">
+&lt;script src=&quot;URL/DEL/SCRIPT.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;var opcionesEntradas = {
+	contenedor:'demo1',
+	imagenPorDefecto:'http://emiliocobos.site40.net/blogger/images/blogger1.png',
+	tamanoImagen:100
+}&lt;/script&gt;
+&lt;script src=&quot;http://emiliocoboscmc.blogspot.com/feeds/posts/default?alt=json-in-script&amp;amp;max-results=9&amp;amp;callback=imgtitulo&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var demo = new slider({
+	contenedor: 'demo1',
+	avanceAuto:3000,
+	cambioAltura:true
+}).init()
+&lt;/script&gt;
+</pre>
+<h1>El CSS</h1>
+<pre class="lang-css prettyprint linenums">
+/*Estilos del menú*/
+#slider-nav{
+    margin:10px auto;
+    width:600px;
+}
+#slider-nav a{
+    background:#f8f8f8;
+    color:#aaa;
+    display:block;
+    float:left;
+    padding:4px 7px;
+    cursor:pointer;
+    text-align:center;
+    border:1px solid #ddd;
+    border-right-width:0;
+}
+#slider-nav a:last-child{
+    border-right-width:1px;
+}
+#slider-nav a.slide{
+/*Estilos para los 
+ * botones individuales */
+}
+#slider-nav a.activo{
+    background:#fff;
+    color:#aaa;
+    -webkit-box-shadow:0 0 2px #333 inset;
+       -moz-box-shadow:0 0 2px #333 inset;
+            box-shadow:0 0 2px #333 inset;
+}
+#slider-nav a.prev{
+    -webkit-border-radius:5px 0 0 5px;
+       -moz-border-radius:5px 0 0 5px;
+            border-radius:5px 0 0 5px;
+}
+#slider-nav a.next{
+    -webkit-border-radius:0 5px 5px 0;
+       -moz-border-radius:0 5px 5px 0;
+            border-radius:0 5px 5px 0;
+    border-right-width:1px;
+}
+/*Estilos del slider*/
+#demo1{
+    width:600px;
+    margin:0 auto;
+    overflow:scroll;
+    -webkit-box-shadow:0 0 7px #aaa;
+       -moz-box-shadow:0 0 7px #aaa;
+            box-shadow:0 0 7px #aaa;
+    background:#eee;
+    -webkit-border-radius:3px;
+       -moz-border-radius:3px;
+            border-radius:3px;
+    border:1em solid #eee;
+ /*   -webkit-transition:2s;
+       -moz-transition:2s;
+         -o-transition:2s;
+            transition:2s;*/
+}
+#demo1 ul{
+    width:1000000px;
+    list-style:none;
+    margin:0;
+    padding:0;
+/*    -webkit-transition:2s;
+       -moz-transition:2s;
+         -o-transition:2s;
+            transition:2s;*/
+}
+.entrada{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:.8em;
+    width:600px;
+    float:left;
+}
+.entrada h2 a{
+    color:#4f4f4f;
+    font-weight:bold;
+    font-size:1.15em;
+}
+.entrada.actual{
+/* Algún estilo especial que queréis
+ * que tenga la entrada actual?*/
+}
+.entrada img{
+    float:left;
+    padding:5px;
+    background:white;
+    -webkit-box-shadow:0 0 5px rgba(0,0,0,.5);
+       -moz-box-shadow:0 0 5px rgba(0,0,0,.5);
+            box-shadow:0 0 5px rgba(0,0,0,.5);
+    margin:0 10px 10px 5px;
+}
+.entrada span.fecha{
+    font-size:.9em;
+    color:#555;
+    border-bottom:1px dashed #666;
+}
+.entrada a img,.entrada a{
+	outline: 0;
+	border: 0;
+}
+</pre>
+</div>
+<script src="bloggerSlider.js"></script>
+<script>var opcionesEntradas = {
+	contenedor:'demo1',
+	imagenPorDefecto:'http://emiliocobos.site40.net/blogger/images/blogger1.png',
+	tamanoImagen:100
+}</script>
+<script src="http://emiliocoboscmc.blogspot.com/feeds/posts/default?alt=json-in-script&amp;max-results=9&amp;callback=imgtitulo"></script>
+<script>
+var demo = new slider({
+	contenedor: 'demo1',
+	avanceAuto:3000,
+	cambioAltura:true
+}).init()
+</script>
+
+</body>
+</html>
+

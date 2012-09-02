@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+	<title>Demo: Sin entradas automáticas</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+	<link href="../demos.css" rel="stylesheet" type="text/css"/>
+	<link href="pretty.css" rel="stylesheet" type="text/css"/>
+	<style>	
+#demo4{
+	overflow:scroll;
+	width:512px;
+	margin:0 auto;
+	background:#fff;
+	font-size: .7em;
+	border: 10px solid #FFFFFF;
+	color:#555;
+	border-radius:10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+#demo4 ul {
+	width:6000px;
+	list-style: none;
+}
+#demo4 li {
+    float: left;
+    position:relative;
+}
+#demo4 img,#demo4 li{
+	width:512px;
+	height:384px
+}
+#demo4 .caption{
+	width:100%;
+	padding:10px 5px;
+	opacity:.8;
+	filter:alpha(opacity=80);
+	position:absolute;
+	bottom:0;
+	color:white;
+	background:black;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+#demo4 .caption span{float:right}
+
+#slider-nav{
+	width:512px;
+	margin:0 auto;
+	position:relative;
+}
+#slider-nav a.slide{
+	display:none;
+  }
+#slider-nav a.prev,#slider-nav a.next{
+	cursor:pointer;
+	position:absolute;
+	text-indent:-9999px;
+	width:25px;
+	height:42px;
+	background:url(http://emiliocobos.site40.net/blogger/add-ons/nivo-slider/themes/orman/arrows.png);
+	background-position:right top;
+	bottom:180px;
+	right:-34px
+}
+#slider-nav a.prev{
+	left:-34px;
+	right:auto;
+	background-position: left top
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Emilio Cobos" />
+	<!-- Date: 2012-01-01 -->
+</head>
+<body>
+<div id="container"><div id="top-bar"><div class="title"><a href="http://emiliocoboscmc.blogspot.com">Emilio Cobos</a></div><div class="link"><a href="http://emiliocoboscmc.blogspot.com">Lee el artículo completo</a></div> <p>Demo: Sin entradas automáticas</p></div>
+
+<div id="demo-nav-container">
+<div id="demo-nav">
+	<p>Otras demos:</p>
+	<ul><li><a href="demo1.html">1</a></li>
+	<li><a href="demo2.html">2</a></li>
+	<li ><a href="demo3.html">3</a></li>
+	<li class="actual"><a href="demo4.html">4</a></li>
+</ul></div></div>
+<div id="demo-container">
+<div id="demo4">
+	<ul>
+		<li>
+			<img src="http://www.ndesign-studio.com/wp-content/uploads/2009/11/koi-1024x768.jpg"/>
+			<div class="caption">Imagen 1. <span>&copy; Nick La</span></div>
+		</li>
+		<li>
+			<img src="http://www.ndesign-studio.com/wp-content/uploads/2009/11/abstractphoenix-1024x768.jpg" />
+			<div class="caption">Imagen 2.<span>&copy; Nick La</span></div>
+		</li>
+		<li>
+			<img src="http://www.ndesign-studio.com/wp-content/uploads/2009/11/abstractpeacock-1024x768.jpg"/>
+			<div class="caption">Imagen 2.<span>&copy; Nick La</span></div>
+		</li>
+	</ul>
+</div>
+<h1>El HTML</h1>
+<pre class="lang-html linenums prettyprint">
+&lt;div id=&quot;demo4&quot;&gt;
+	&lt;ul&gt;
+		&lt;li&gt;
+			&lt;img src=&quot;http://www.ndesign-studio.com/wp-content/uploads/2009/11/koi-1024x768.jpg&quot;/&gt;
+			&lt;div class=&quot;caption&quot;&gt;Imagen 1. &lt;span&gt;&amp;copy; Nick La&lt;/span&gt;&lt;/div&gt;
+		&lt;/li&gt;
+		&lt;li&gt;
+			&lt;img src=&quot;http://www.ndesign-studio.com/wp-content/uploads/2009/11/abstractphoenix-1024x768.jpg&quot; /&gt;
+			&lt;div class=&quot;caption&quot;&gt;Imagen 2.&lt;span&gt;&amp;copy; Nick La&lt;/span&gt;&lt;/div&gt;
+		&lt;/li&gt;
+		&lt;li&gt;
+			&lt;img src=&quot;http://www.ndesign-studio.com/wp-content/uploads/2009/11/abstractpeacock-1024x768.jpg&quot;/&gt;
+			&lt;div class=&quot;caption&quot;&gt;Imagen 2.&lt;span&gt;&amp;copy; Nick La&lt;/span&gt;&lt;/div&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<h1>El Javascript</h1>
+<pre class="lang-javascript prettyprint linenums">
+&lt;script src=&quot;url/del/script.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var demo4 = new slider({
+	contenedor: 'demo4',
+	avanceAuto:3000
+})
+demo4.init()
+&lt;/script&gt;
+</pre>
+<h1>El CSS</h1>
+<pre class="lang-css prettyprint linenums">
+#demo4{
+	overflow:scroll;
+	width:512px;
+	margin:0 auto;
+	background:#fff;
+	font-size: .7em;
+	border: 10px solid #FFFFFF;
+	color:#555;
+	border-radius:10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+#demo4 ul {
+	width:6000px;
+	list-style: none;
+}
+#demo4 li {
+    float: left;
+    position:relative;
+}
+#demo4 img,#demo4 li{
+	width:512px;
+	height:384px
+}
+#demo4 .caption{
+	width:100%;
+	padding:10px 5px;
+	opacity:.8;
+	filter:alpha(opacity=80);
+	position:absolute;
+	bottom:0;
+	color:white;
+	background:black;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+#demo4 .caption span{float:right}
+
+#slider-nav{
+	width:512px;
+	margin:0 auto;
+	position:relative;
+}
+#slider-nav a.slide{
+	display:none;
+  }
+#slider-nav a.prev,#slider-nav a.next{
+	cursor:pointer;
+	position:absolute;
+	text-indent:-9999px;
+	width:25px;
+	height:42px;
+	background:url(http://emiliocobos.site40.net/blogger/add-ons/nivo-slider/themes/orman/arrows.png);
+	background-position:right top;
+	bottom:180px;
+	right:-34px
+}
+#slider-nav a.prev{
+	left:-34px;
+	right:auto;
+	background-position: left top
+}
+</pre>
+</div>
+</div>
+<script src="pretty.js"></script>
+<script src="bloggerSlider.js"></script>
+<script>
+var demo4 = new slider({
+	contenedor: 'demo4',
+	avanceAuto:3000
+})
+demo4.init()
+</script>
+</body>
+</html>
